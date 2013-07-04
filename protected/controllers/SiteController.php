@@ -1,6 +1,6 @@
 <?php
 
-class SiteController extends Controller
+class SiteController extends FrontendController
 {
 	/**
 	 * Declares class-based actions.
@@ -27,9 +27,24 @@ class SiteController extends Controller
 	 */
 	public function actionIndex()
 	{
+        $content = Content::model()->find('is_homepage = :homepage AND published = :published', array(
+            ':homepage' => TRUE, ':published' => TRUE
+        ));
+
+        if ($content instanceof Content)
+        {
+            $this->pageTitle = $content->title;
+        }
+        else
+        {
+            $this->setPageTitle('Главная');
+        }
+
 		// renders the view file 'protected/views/site/index.php'
 		// using the default layout 'protected/views/layouts/main.php'
-		$this->render('index');
+		$this->render('index', array(
+            'model' => $content
+        ));
 	}
 
 	/**
@@ -98,12 +113,5 @@ class SiteController extends Controller
 		$this->render('login',array('model'=>$model));
 	}
 
-	/**
-	 * Logs out the current user and redirect to homepage.
-	 */
-	public function actionLogout()
-	{
-		Yii::app()->user->logout();
-		$this->redirect(Yii::app()->homeUrl);
-	}
+
 }

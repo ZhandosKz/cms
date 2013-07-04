@@ -1,0 +1,21 @@
+.jGrowl .jGrowl-notification.error
+{
+    background-color: #F2DEDE;
+    color: #B94A48;
+    overflow: hidden;
+}
+.jGrowl .jGrowl-notification.success
+{
+    background-color: #DFF0D8;
+    color: #468847;
+    overflow: hidden;
+}
+div.jGrowl div.jGrowl-closer
+{
+    background: #D9EDF7;
+    color: #3A87AD;
+}
+.jGrowl .ui-state-highlight
+{
+    background: 0;
+}
